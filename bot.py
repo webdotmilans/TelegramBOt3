@@ -3,11 +3,13 @@ from flask import Flask, request
 import telebot
 from telebot.types import Update
 import openai
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
-BOT_TOKEN = os.environ.get('BOT_TOKEN')
-OPENAI_KEY = os.environ.get('OPENAI_KEY')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+OPENAI_KEY = os.getenv('OPENAI_KEY')
 
 bot = telebot.TeleBot(BOT_TOKEN)
 openai.api_key = OPENAI_KEY
@@ -50,6 +52,10 @@ def webhook():
     json_string = request.get_data().decode('utf-8')
     update = Update.de_json(json_string)
     bot.process_new_updates([update])
+    return "OK", 200
+
+@app.route('/', methods=['GET'])
+def home():
     return "OK", 200
 
 if __name__ == '__main__':
