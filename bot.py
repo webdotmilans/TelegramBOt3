@@ -69,5 +69,5 @@ def webhook():
 
 if __name__ == '__main__':
     bot.remove_webhook()
-    bot.set_webhook(url=f'husdh/{BOT_TOKEN}')
-    app.run(host='0.0.0.0', port=5000)
+    bot.set_webhook(url=f'/{BOT_TOKEN}')
+    app.run(host='0.0.0.0', port=8000)
